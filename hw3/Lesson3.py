@@ -19,5 +19,9 @@ print(i <= -5)
 a = 2
 b = 5
 c = 6
-d = (c**a + b**a) * a**a + c*a
+# d = (c**a + b**a) * a**a + c*a
+d = str(a) + str(b) + str(c)
 print(d)
+
+
+
