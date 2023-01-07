@@ -35,17 +35,8 @@ class IterFib:
 
 fib = IterFib()
 
-
-c_it = -1
 for i in range(num_fib):
-
-    # c_it += 1
     next(fib)
-    # if num_fib == c_it:
-    #     print(next(fib))
-    #     print(c_it, 'yuy')
-    # c_it += 1
-    # print(c_it, 'yuy')
 print('Fibonacci sequence using Iterator: ')
 print(f'The {num_fib}th number in the Fibonacci sequence is {next(fib)}\n')
 
