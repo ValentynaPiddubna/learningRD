@@ -20,18 +20,6 @@ def my_func():
     print('This is my func')
 
 
-# CustomExeption
-
-
-# class MyCustomException(Exception):
-#     def __init__(self):
-#         message = 'Custom exception is occurred!'
-#         super().__init__(message)
-#
-#
-# raise MyCustomException()
-
-
 class ContextManager():
     def __init__(self):
         print('\nWhat is the sense of this task?')
@@ -57,6 +45,19 @@ else:
     print('This is the test Context manager without sense with try except')
 finally:
     print('='*10)
+
+
+
+# CustomExeption
+
+
+class MyCustomException(Exception):
+    def __init__(self):
+        message = 'Custom exception is occurred!'
+        super().__init__(message)
+
+
+raise MyCustomException()
 
 
 
