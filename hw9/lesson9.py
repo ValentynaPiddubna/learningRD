@@ -19,21 +19,26 @@ for i in gen_fib(num_fib):
 # iterator
 
 
-class IterFib:
-    def __init__(self):
+class IterFib():
+    def __init__(self, n):
         self.current = 0
         self.next = 1
+        self.i = 0
+        self.n = n
 
     def __iter__(self):
         return self
 
     def __next__(self):
+        if self.i > self.n:
+            raise StopIteration
+        self.i += 1
         temp = self.current
         self.current, self.next = self.next, self.current + self.next
         return temp
 
 
-fib = IterFib()
+fib = IterFib(num_fib)
 
 for i in range(num_fib):
     next(fib)
