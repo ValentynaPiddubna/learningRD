@@ -1,13 +1,10 @@
 import datetime
 import inspect
 
-func_name = None
 
 def my_decorator_func(func):
     def deco_func(*args, **kwargs):
-        global func_name
-        frame = inspect.currentframe()
-        func_name = inspect.getframeinfo(frame).function
+        func_name = func.__name__
         res = func(*args, **kwargs)
         now_ = datetime.datetime.now()
         print(f'The function name is {func_name} - was called at {now_.strftime("%H:%M")}\n')
@@ -16,11 +13,11 @@ def my_decorator_func(func):
 
 
 @my_decorator_func
-def my_func():
+def my_function():
     print('This is my func')
 
 
-my_func()
+my_function()
 
 
 class ContextManager:
@@ -33,10 +30,10 @@ class ContextManager:
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
+        print('=' * 10)
         if exc_type:
             print(exc_value)
             return True
-        print('=' * 10)
 
 
 with ContextManager() as manager:
@@ -56,12 +53,12 @@ finally:
 # CustomExeption
 
 
-class MyCustomException(Exception):
-    def __init__(self):
-        message = 'Custom exception is occurred!'
-        super().__init__(message)
-
-
-raise MyCustomException()
-
+# class MyCustomException(Exception):
+#     def __init__(self):
+#         message = 'Custom exception is occurred!'
+#         super().__init__(message)
+#
+#
+# raise MyCustomException()
+#
 
