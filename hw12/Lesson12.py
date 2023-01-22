@@ -3,8 +3,8 @@ from pprint import pprint
 
 
 def write_(data, filename):
-    data = json.dumps(data)
-    data = json.loads(str(data))
+    # data = json.dumps(data)
+    # data = json.loads(str(data))
     with open(filename, 'w', encoding='UTF-8') as file_:
         json.dump(data, file_, indent=4)
 
@@ -24,7 +24,7 @@ print('!* In this App you can enter one of five available commands.'
 
 while True:
     command = input('Enter a command: ')
-    if command == 'add': # додати запис
+    if command == 'add': # add record
         name = input('Enter a name: ')
         phone_book = read_('dict.json')
         if phone_book.get(name):
@@ -35,7 +35,7 @@ while True:
             write_(phone_book, 'dict.json')
             print('A new record created')
 
-    elif command == 'delete':         # всвидалити запис за іменем (ключем)#
+    elif command == 'delete':         # delete record by name(key)
         del_name = input('Enter the name that you would like to delete: ')
         phone_book = read_('dict.json')
         if phone_book.get(del_name):
@@ -45,7 +45,7 @@ while True:
         else:
             print(f"The {del_name} doesn't exist in the phone book. Please try again!!!" )
 
-    elif command == 'show':             # детальна інформація по імені
+    elif command == 'show':             # detail info by name
         show_name = input('Enter a name: ')
         phone_book = read_('dict.json')
         if phone_book.get(show_name):
@@ -53,11 +53,11 @@ while True:
         else:
             print(f"The {show_name} doesn't exist in the phone book. Please try again!!!")
 
-    elif command == 'list':             # список всіх імен в книзі
+    elif command == 'list':             # list of all names in phone book
         phone_book = read_('dict.json')
         pprint(phone_book)
 
-    elif command == 'stats':             # кількість записів
+    elif command == 'stats':             # Amount of records
         phone_book = read_('dict.json')
         if len(phone_book) == 1:
             str_ = 'record'
@@ -70,22 +70,18 @@ while True:
 
 
 import datetime
-import inspect
-
-func_name = None
 
 
 def my_decorator_func(func):
-    def deco_func():
-        func()
-        global func_name
-        frame = inspect.currentframe()
-        func_name = inspect.getframeinfo(frame).function
+    def deco_func(*args, **kwargs):
+        func_name = func.__name__
+        res = func(*args, **kwargs)
         now_ = datetime.datetime.now().strftime("%H:%M")
         dict_ = {func_name: now_}
         json_data = json.dumps(dict_)
         with open('Deco.json', 'w', encoding='UTF-8') as file:
             file.write(json_data)
+        return res
     return deco_func
 
 
@@ -94,15 +90,17 @@ def my_func():
     print('This is my func')
 
 
-my_function = my_decorator_func(my_func)
-
 my_func()
 
 
 class MyCustomException(Exception):
     def __init__(self):
         message = 'Custom exception is occurred!'
+        self.logging()
         super().__init__(message)
+
+    def logging(self):
+        return self
 
 
 try:
