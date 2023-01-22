@@ -3,8 +3,6 @@ from pprint import pprint
 
 
 def write_(data, filename):
-    # data = json.dumps(data)
-    # data = json.loads(str(data))
     with open(filename, 'w', encoding='UTF-8') as file_:
         json.dump(data, file_, indent=4)
 
