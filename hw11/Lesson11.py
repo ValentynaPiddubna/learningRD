@@ -21,44 +21,44 @@ my_function()
 
 
 class ContextManager:
-    def __init__(self):
-        print('=' * 10)
-        print('What is the sense of this task?')
+    # def __init__(self):
+    #     print('=' * 10)
+    #     print('What is the sense of this task?')
 
     def __enter__(self):
-        # print('='*10)
+        print('='*10)
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        print('=' * 10)
         if exc_type:
             print(exc_value)
-            return True
+        print('=' * 10)
+        return True
 
 
 with ContextManager() as manager:
-    print('This is the test Context manager without sense')
+    print('This is the test Context manager')
 
 print('\n')
 try:
     print('='*10)
-    print('What is the sense of this task?')
+    raise Exception
 except Exception as e:
     print('Some exception: {e}')
 else:
-    print('This is the test Context manager without sense with try except')
+    print('This is the test Context manager with try except')
 finally:
     print('='*10)
 
 # CustomExeption
 
 
-# class MyCustomException(Exception):
-#     def __init__(self):
-#         message = 'Custom exception is occurred!'
-#         super().__init__(message)
-#
-#
-# raise MyCustomException()
-#
+class MyCustomException(Exception):
+    def __init__(self):
+        message = 'Custom exception is occurred!'
+        super().__init__(message)
+
+
+raise MyCustomException()
+
 
