@@ -90,26 +90,23 @@ def my_func():
 
 my_func()
 
+# import logging
+
 
 class MyCustomException(Exception):
     def __init__(self):
         message = 'Custom exception is occurred!'
+        now_ = datetime.datetime.now().strftime("%H:%M")
+        json_text = json.dumps(f'{message} at {now_}')
+        self.json_text = json.loads(str(json_text))
         self.logging()
-        super().__init__(message)
+        super().__init__(self)
 
     def logging(self):
+        with open('Deco.json', 'w', encoding='UTF-8') as file:
+            file.write(self.json_text)
         return self
 
 
-try:
-    raise MyCustomException()
-except MyCustomException as error_:
-    e = error_
-    now_ = datetime.datetime.now().strftime("%H:%M")
-    json_text = json.dumps(f'{e} at {now_}')
-    json_text = json.loads(str(json_text))
-    with open('Deco.json', 'w', encoding='UTF-8') as file:
-        json.dump(json_text, file)
-finally:
-    print('The error text was recorded in the Deco.json')
+raise MyCustomException()
 
