@@ -22,8 +22,7 @@ class TelegramBot(Bot):
     def __init__(self, name, url=None, chat_id=None):
         self.url = url
         self.chat_id = chat_id
-        name = super().__init__(name) # Which of those 2 rows should I use?
-        # Bot.__init__(self, name)    # Which of those 2 rows should I use?
+        super().__init__(name)
 
     def send_message(self, message):
         print(f'{self.name} bot says {message} to chat {self.chat_id} using {self.url}')
@@ -64,11 +63,11 @@ class User:
         self.name = name
 
     def __eq__(self, other):
-        return self.name == other.name.upper()
+        return self.name.upper() == other.name.upper()
 
 
-first_user = User('VALENTYNA')
-second_user = User('Valentyna')
+first_user = User('ValenTyna')
+second_user = User('valentYNA')
 
 print(first_user == second_user)
 
@@ -84,7 +83,6 @@ def say_name_func(self):
 
 
 def send_message_func(self, message):
-    self.message = message
     print(message)
 
 
@@ -99,7 +97,7 @@ new_bot = type(
     }
 )
 
-type_bot = new_bot('Marvel')
+type_bot = new_bot('MarvelBot')
 type_bot.say_name()
 type_bot.send_message('Hello guys')
 
@@ -111,7 +109,6 @@ def init_func_tg(self, name, url=None, chat_id=None):
 
 
 def send_message_func_tg(self, message):
-    self.message = message
     print(f'{self.name} bot says {message} to chat {self.chat_id} using {self.url}')
 
 
