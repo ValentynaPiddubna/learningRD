@@ -1,0 +1,14 @@
+import sqlite3
+
+connection = sqlite3.connect('20HW.sqlite')
+
+cursor = connection.cursor()
+
+
+query = ('CREATE TABLE USER('
+    'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+    'first_name TEXT,'
+    'last_name TEXT,'
+    'age INTEGER)')
+
+cursor.execute(query)
