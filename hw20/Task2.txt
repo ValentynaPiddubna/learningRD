@@ -1,0 +1,18 @@
+import sqlite3
+
+connection = sqlite3.connect('20HW.sqlite')
+
+cursor = connection.cursor()
+
+data = [
+    ('Mark', 'Twen', 25),
+    ('Domimic', 'Lounder', 31),
+    ('Jackie', 'Roryilen', 30),
+    ('Andrew', 'Bradt', 35),
+    ('Shubhank', 'Kare', 36),
+]
+
+query = 'INSERT INTO USER (first_name,last_name, age) values (?, ?, ?)'
+
+cursor.executemany(query, data)
+connection.commit()
