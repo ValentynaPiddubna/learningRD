@@ -1,0 +1,4 @@
+select "http://user."||purchase.user_id||"/" as user_id,
+count(id) as purchases_count
+from purchase
+group by user_id

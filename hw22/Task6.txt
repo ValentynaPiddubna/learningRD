@@ -1,0 +1,7 @@
+SELECT "http://users."||p.user_id||"/" as user_id,
+u.first_name, u.last_name,
+sum(b.price) as total_purchases
+FROM purchase p
+left join users u on p.user_id = u.id
+left join books b on p.book_id = b.id
+group by p.user_id

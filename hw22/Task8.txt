@@ -1,0 +1,8 @@
+
+select b.title, p.count_p as count_purchases
+from
+(select book_id,  count(id) as count_p
+from purchase
+group by book_id) p
+left join books b on p.book_id = b.id
+order by count_purchases desc

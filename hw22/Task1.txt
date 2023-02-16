@@ -1,0 +1,33 @@
+CREATE TABLE users(
+      id integer primary key autoincrement,
+      first_name TEXT NOT NULL,
+      last_name TEXT NOT NULL,
+      age INTEGER NOT NULL
+      );
+
+CREATE TABLE publishing_houses(
+    id integer primary key autoincrement,
+    name TEXT NOT NULL,
+    rating integer DEFAULT 5
+    );
+
+CREATE TABLE books(
+    id integer primary key autoincrement,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    year integer NOT NULL,
+    price numeric NOT NULL,
+    publishing_house_id integer NOT NULL,
+    FOREIGN KEY (publishing_house_id) references publishing_houses(id)
+    );
+
+CREATE TABLE purchases
+(
+    id integer primary key autoincrement,
+    user_id integer NOT NULL,
+    book_id integer NOT NULL,
+    date TEXT  TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) references users(id),
+    FOREIGN KEY (book_id) references books(id)
+);
+

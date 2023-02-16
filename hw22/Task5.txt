@@ -1,0 +1,4 @@
+select count(p.id) as amount
+from purchase p
+join books b on p.book_id = b.id
+where b.author = 'Rowling'
