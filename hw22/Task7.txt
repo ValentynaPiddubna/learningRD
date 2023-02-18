@@ -1,0 +1,5 @@
+select b.author, sum(b.price) as sum_purchases,
+count(p.book_id) as count_purchases
+from purchase p
+left join books b on p.book_id = b.id
+group by b.author

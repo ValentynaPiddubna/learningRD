@@ -1,0 +1,4 @@
+select "http://users."||u.id||"/" as id, u.first_name, u.last_name, b.title
+from users u left join purchase p on u.id = p.user_id
+join books b on p.book_id = b.id
+order by u.id
