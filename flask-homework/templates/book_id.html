@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Book Details</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    {% if username %}
+      <p>Hello, {{ username }}!</p>
+    {% endif %}
+    <h1>Book Title: {{ title }}</h1>
+    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+  </body>
+</html>
