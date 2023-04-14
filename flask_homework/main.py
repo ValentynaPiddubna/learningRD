@@ -1,12 +1,16 @@
-from flask import Flask, jsonify, abort, request, redirect, render_template, make_response, session, url_for
+import os
+import jwt
+from flask_homework import app, db
+from flask_homework.models import User, Book, Purchase
+from flask import jsonify, abort, request, redirect, render_template, make_response, session, url_for
 import logging
 import random
 from faker import Faker
 
 
-app = Flask(__name__)
-app.secret_key = 'my_secret_key'
+app.secret_key = os.getenv('SECRET_KEY')
 logging.basicConfig(level=logging.INFO)
+
 
 def get_username():
     """Get username from session"""
@@ -144,3 +148,4 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
