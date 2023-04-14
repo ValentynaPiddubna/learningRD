@@ -8,8 +8,8 @@ class User(db.Model):
     last_name = db.Column(db.String, nullable=False)
     age = db.Column(db.Integer, nullable=False)
 
-    def __repr__(self):
-        return f'<UserBook {self.id}>'
+    # def __repr__(self):
+    #     return f'<UserBook {self.id}>'
 
 
 class Book(db.Model):

@@ -1,7 +1,6 @@
 import os
-import jwt
 from flask_homework import app, db
-from flask_homework.models import User, Book, Purchase
+from .models import User, Book, Purchase
 from flask import jsonify, abort, request, redirect, render_template, make_response, session, url_for
 import logging
 import random
