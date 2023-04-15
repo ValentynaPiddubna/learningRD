@@ -8,8 +8,13 @@ class User(db.Model):
     last_name = db.Column(db.String, nullable=False)
     age = db.Column(db.Integer, nullable=False)
 
-    # def __repr__(self):
-    #     return f'<UserBook {self.id}>'
+    def serialize(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'age': self.age
+        }
 
 
 class Book(db.Model):

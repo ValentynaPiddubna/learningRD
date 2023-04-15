@@ -8,11 +8,12 @@ app = Flask(__name__)
 
 app.config.from_object(AppConfig)
 
-db.init_app(app)
+
 
 from .main import *
 from .models import *
 
+db.init_app(app)
 
 with app.app_context():
     db.create_all()

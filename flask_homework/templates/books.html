@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Books</title>
+    <title>List of Books</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    {% if username %}
-      <p>Hello, {{ username }}!</p>
-    {% endif %}
-	<h1>List of books</h1>
-	<form method="GET" action="/books">
-		<label for="count">Number of books:</label>
-		<input type="text" name="count" id="count" value="{{ count }}">
-		<button type="submit">Submit</button>
-	</form>
-	{% if selected_books %}
-		<h2>Selected Books:</h2>
-		<ul>
-			{% for book in selected_books %}
-				<li>{{ book }}</li>
-			{% endfor %}
-		</ul>
-	{% endif %}
-     <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+    <h2>List of Books</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Published year</th>
+                <th>Price, $</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>{{ book.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>
-

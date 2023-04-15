@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Book Details</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-  </head>
-  <body>
-    {% if username %}
-      <p>Hello, {{ username }}!</p>
-    {% endif %}
-    <h1>Book Title: {{ title }}</h1>
-    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
-  </body>
+<head>
+    <title>Book ID</title>
+
+</head>
+<body>
+
+    <p>The book id is {{ book.id }}</p>
+    <p>Title: {{ book.title }}</p>
+    <p>Author: {{ book.author }}</p>
+    <p>Year: {{ book.year }}</p>
+    <p>Price ($): {{ book.price}}</p>
+</body>
 </html>

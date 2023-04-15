@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase {{ purchase.id }}</title>
+</head>
+<body>
+    <h2>Purchase {{ purchase.id }}</h2>
+    <p>User: {{ purchase.user.first_name }} {{ purchase.user.last_name }}</p>
+    <p>Book: {{ purchase.book.title }} by {{ purchase.book.author }}</p>
+    <p>Date: {{ purchase.date.strftime('%Y-%m-%d') }}</p>
+    <p>Price: ${{ purchase.book.price }}</p>
+</body>
+</html>
