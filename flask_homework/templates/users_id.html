@@ -8,8 +8,10 @@
     {% if username %}
       <p>Hello, {{ username }}!</p>
     {% endif %}
-    <h2>User ID</h2>
-    <p>The user id is {{ user_id }}</p>
+
+    <p>The user with ID {{ user.id }}</p>
+    <p>{{ user.first_name }} {{ user.last_name }} {{user.age}} years old</p>
+
     <a href="{{ url_for('logout') }}" class="btn">Logout</a>
 </body>
 </html>

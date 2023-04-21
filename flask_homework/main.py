@@ -1,12 +1,17 @@
-from flask import Flask, jsonify, abort, request, redirect, render_template, make_response, session, url_for
+import os
+from flask_homework import app, db
+from flask import jsonify, abort, request, redirect, render_template, make_response, session, url_for
 import logging
 import random
 from faker import Faker
+from flask_homework.models import User, Book, Purchase
+from random import randint
+from sqlalchemy.orm import joinedload
 
 
-app = Flask(__name__)
-app.secret_key = 'my_secret_key'
+app.secret_key = os.getenv('SECRET_KEY')
 logging.basicConfig(level=logging.INFO)
+
 
 def get_username():
     """Get username from session"""
@@ -50,35 +55,19 @@ books = ["The Great Gatsby", "To Kill a Mockingbird", "One Hundred Years of Soli
 
 @app.route('/books')
 def get_books():
-    username = get_username()
-    if not username:
-        return redirect('/login')
-    count = request.args.get('count')
-    if count:
-        try:
-            count = int(count)
-            if count < 1:
-                raise ValueError
-            if count > len(books):
-                raise ValueError("Sample larger than population")
-        except ValueError as e:
-            return make_response(jsonify({"error": str(e)}), 400)
-        selected_books = random.sample(books, count)
-    else:
-        num_books = random.randint(1, len(books))
-        selected_books = random.sample(books, num_books)
-    return render_template('books.html', count=count, selected_books=selected_books, username=username)
+    books = Book.query.all()
+    return render_template('books.html', books=books)
 
 
 @app.route('/users/<int:user_id>')
-def get_user(user_id):
-    username = get_username()
-    if not username:
-        return redirect('/login')
-    if user_id % 2 == 0:
-        return render_template('users_id.html', user_id=user_id, username=username)
-    else:
-        abort(404)
+def user(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template('users_id.html', user=user)
+
+@app.route('/books/<int:book_id>')
+def book(book_id):
+    book = Book.query.get_or_404(book_id)
+    return render_template('book_id.html', book=book)
 
 
 @app.route('/books/<string:title>')
@@ -87,7 +76,7 @@ def get_book_by_title(title):
     if not username:
         return redirect('/login')
     transformed_title = title.capitalize()
-    return render_template('book_id.html', title=transformed_title, username=username)
+    return render_template('book_title.html', title=transformed_title, username=username)
 
 
 @app.route('/params')
@@ -142,5 +131,34 @@ def logout():
     return redirect(url_for('login'))
 
 
+@app.route('/users_json')
+def new_users():
+    users = User.query.all()
+    return jsonify([user.serialize() for user in users])
+
+
+@app.route('/users_html')
+def users():
+    users = User.query.all()
+    return render_template('users_1.html', users=users)
+
+
+@app.route('/purchases')
+def get_purchases():
+    purchases = Purchase.query.options(joinedload(Purchase.user), joinedload(Purchase.book)).all()
+    return render_template('purchases.html', purchases=purchases)
+
+
+@app.route('/purchases/<int:purchase_id>')
+def purchase(purchase_id):
+    purchase = Purchase.query.get_or_404(purchase_id)
+    return render_template('purchase.html', purchase=purchase)
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
