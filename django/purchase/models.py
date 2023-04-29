@@ -15,5 +15,6 @@ class Purchase(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return f"{self.book.title} ({self.user.first_name} {self.user.last_name})"
+        return f"{self.id} {self.book.title} ({self.user.first_name} {self.user.last_name})"
+
 

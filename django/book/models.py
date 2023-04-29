@@ -13,4 +13,4 @@ class Book(models.Model):
         unique_together = ('title', 'author')
 
     def __str__(self):
-        return self.title
+        return f"{self.title} by {self.author}"

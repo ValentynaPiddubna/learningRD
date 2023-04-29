@@ -15,3 +15,6 @@ class User(models.Model):
             'last_name': self.last_name,
             'age': self.age,
         }
+
+    def __str__(self):
+        return f"{self.id}: {self.first_name} {self.last_name} {self.age}"
