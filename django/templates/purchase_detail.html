@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        {% block content %}
+          <h1>Purchase Detail</h1>
+          <p><strong>Book:</strong> {{ purchase.book }}</p>
+          <p><strong>User:</strong> {{ purchase.user }}</p>
+          <p><strong>Date:</strong> {{ purchase.date }}</p>
+        {% endblock %}
+
+</body>
+</html>

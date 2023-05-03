@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h2>Purchase List</h2>
+  <ul>
+    {% for purchase in purchase %}
+      <li><strong>Purchase:{{ purchase.date }}</strong>
+        <a href="{% url 'purchase:purchase_detail' purchase.pk %}">{{ purchase }}</a></li>
+      </li>
+    {% empty %}
+      <li>No purchases yet.</li>
+    {% endfor %}
+  </ul>
+
+
+</body>
+</html>
