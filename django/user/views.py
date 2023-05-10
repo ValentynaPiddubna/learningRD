@@ -1,25 +1,22 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import viewsets
 from .models import User
-from django.http import JsonResponse
-from django.views.generic import ListView, DetailView, CreateView
-from django.urls import reverse_lazy
+from .serializers import UserSerializer
+from .pagination import UserPagination
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework import status
 
 
-class UserListView(ListView):
-    model = User
-    template_name = 'user_list.html'
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = UserPagination
+    filter_fields = ('id', 'first_name', 'age')
+    ordering_fields = ('id', 'first_name', 'age')
 
 
-class UserDetailView(DetailView):
-    model = User
-    template_name = 'user_detail.html'
-    context_object_name = 'user'
 
 
-class UserCreateView(CreateView):
-    model = User
-    template_name = 'user_form.html'
-    fields = '__all__'
-    success_url = reverse_lazy('user_list')
+
+
 
