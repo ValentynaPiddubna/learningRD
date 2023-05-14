@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -140,4 +141,23 @@ REST_FRAMEWORK = {
     ],
 
     }
+# Celery
 
+# Встановлення брокера повідомлень
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'  # або 'amqp://guest@localhost//'
+
+# Встановлення результуючого backend
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'  # або 'db+sqlite:///results.sqlite3'
+
+# Список Celery задач, які повинні бути виконані при запуску проєкту Django
+CELERY_IMPORTS = [
+    'user.tasks',
+]
+
+# Налаштування часового планування задач Celery
+CELERY_BEAT_SCHEDULE = {
+    'print_users_count': {
+        'task': 'user.tasks.print_users_count',
+        'schedule': 60.0,  # щохвилини
+    },
+}
