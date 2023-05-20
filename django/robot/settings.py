@@ -161,3 +161,22 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': 60.0,  # щохвилини
     },
 }
+# Настройки для подключения к базе данных Postgres
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+    }
+}
+
+# Настройки для подключения к Redis
+REDIS_HOST = os.environ.get('REDIS_HOST')
+REDIS_PORT = os.environ.get('REDIS_PORT')
+
+# Настройки для Celery
+BROKER_URL = os.environ.get('CELERY_BROKER')
+# CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
